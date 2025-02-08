@@ -47,7 +47,7 @@ void HMI::update()
     _hw.display();
 }
 
-void HMI::register_screen(std::unique_ptr<BaseScreen> screen)
+void HMI::register_screen(std::unique_ptr<BaseApp> screen)
 {
     _screens[_registered_screens] = std::move(screen);
     _registered_screens++;

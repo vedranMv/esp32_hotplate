@@ -4,7 +4,7 @@
 #include <memory>
 #include <stdint.h>
 
-#include "screens/base_screen.hpp"
+#include "apps/base_app.hpp"
 
 
 class HMI
@@ -16,7 +16,7 @@ class HMI
         void update();
         Adafruit_SSD1306& hw() { return _hw; }
 
-        void register_screen(std::unique_ptr<BaseScreen> screen);
+        void register_screen(std::unique_ptr<BaseApp> screen);
         void timer_callback();
 
     private:
@@ -24,7 +24,7 @@ class HMI
 
     Adafruit_SSD1306 _hw;
     ClickEncoder& _encoder;
-    std::array<std::unique_ptr<BaseScreen>, 5>_screens;
+    std::array<std::unique_ptr<BaseApp>, 5>_screens;
     uint8_t _registered_screens = 0;
     uint8_t _active_screen = 0;
 };

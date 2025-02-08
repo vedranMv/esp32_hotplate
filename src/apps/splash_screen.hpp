@@ -1,8 +1,8 @@
 #pragma once
-#include "base_screen.hpp"
+#include "base_app.hpp"
 
 
-class SplashScreen: public BaseScreen
+class SplashScreen: public BaseApp
 {
 public:
 

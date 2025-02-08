@@ -4,9 +4,9 @@
 #include <EEPROM.h>
 #include "bsp.hpp"
 #include "hmi.hpp"
-#include "screens/main_screen.hpp"
-#include "screens/stats_screen.hpp"
-#include "screens/splash_screen.hpp"
+#include "apps/manual.hpp"
+#include "apps/stats.hpp"
+#include "apps/splash_screen.hpp"
 
 ESP32Timer ITimer0(0);
 
@@ -27,8 +27,8 @@ void setup() {
     SplashScreen splash;
     splash.render(HMI::get().hw());
 
-    hmi.register_screen(std::move(std::make_unique<MainScreen>()));
-    hmi.register_screen(std::move(std::make_unique<StatsScreen>()));
+    hmi.register_screen(std::move(std::make_unique<ManualMode>()));
+    hmi.register_screen(std::move(std::make_unique<Stats>()));
 }
 
 void loop() {

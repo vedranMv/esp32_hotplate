@@ -3,7 +3,7 @@
 #include <ClickEncoder.h>
 #include <Adafruit_SSD1306.h>
 
-class BaseScreen
+class BaseApp
 {
 public:
     virtual void render(Adafruit_SSD1306 &display) = 0;

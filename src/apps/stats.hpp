@@ -1,13 +1,13 @@
 #pragma once
-#include "base_screen.hpp"
+#include "base_app.hpp"
 
 #include "bsp.hpp"
 
-class StatsScreen: public BaseScreen
+class Stats: public BaseApp
 {
 public:
 
-    StatsScreen() {};
+    Stats() {};
     void render(Adafruit_SSD1306 &display) final
     {
         display.setTextColor(SSD1306_WHITE);

@@ -1,13 +1,13 @@
-#include "screens/main_screen.hpp"
+#include "apps/manual.hpp"
 
 #include "bsp.hpp"
 
-MainScreen::MainScreen() 
+ManualMode::ManualMode() 
 {
     _set_state(State::Cooling);
 };
 
-void MainScreen::render(Adafruit_SSD1306 &display)
+void ManualMode::render(Adafruit_SSD1306 &display)
 {
     auto T = bsp::analog::get_plate_temp_C();
 
@@ -54,7 +54,7 @@ void MainScreen::render(Adafruit_SSD1306 &display)
     }
 }
 
-void MainScreen::input_callback(Button::eButtonStates btn_state, int16_t enc_increment)
+void ManualMode::input_callback(Button::eButtonStates btn_state, int16_t enc_increment)
 {
     if (_state_edit())
     {
@@ -110,7 +110,7 @@ void MainScreen::input_callback(Button::eButtonStates btn_state, int16_t enc_inc
     _last_enc_increment = enc_increment; 
 }
 
-void MainScreen::run_temp_regulation()
+void ManualMode::run_temp_regulation()
 {
     auto T = bsp::analog::get_plate_temp_C();
     auto temp_delta = T - _temp_setpoint;
@@ -134,11 +134,11 @@ void MainScreen::run_temp_regulation()
 
 }
 
-bool MainScreen::_state_edit() { return _state == State::Editing; }
-bool MainScreen::_state_heating() { return _state == State::Heating; }
-bool MainScreen::_state_cooling() { return _state == State::Cooling; }
+bool ManualMode::_state_edit() { return _state == State::Editing; }
+bool ManualMode::_state_heating() { return _state == State::Heating; }
+bool ManualMode::_state_cooling() { return _state == State::Cooling; }
 
-void MainScreen::_set_state(State state)
+void ManualMode::_set_state(State state)
 {
     if (state == State::Cooling || state == State::Editing)
     {

@@ -1,8 +1,8 @@
 #pragma once
-#include "base_screen.hpp"
+#include "base_app.hpp"
 
 
-class MainScreen: public BaseScreen
+class ManualMode: public BaseApp
 {
 public:
     enum class State
@@ -12,7 +12,7 @@ public:
         Editing
     };
 
-    MainScreen();
+    ManualMode();
     void render(Adafruit_SSD1306 &display) final;
     void input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final;
 
