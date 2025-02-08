@@ -1,10 +1,16 @@
 #include "bsp.hpp"
+
+#include <Arduino.h>
 #include <config2eeprom.hpp>
 #include "driver/temp_sensor.h"
 
 
 namespace bsp::analog
 {
+    const gpio_num_t AIN_TEMP_PLATE = GPIO_NUM_4;
+    const gpio_num_t AIN_VOLT_IN = GPIO_NUM_2;
+    const gpio_num_t AIN_AMP_IN = GPIO_NUM_3;
+
 
 void init()
 {
@@ -95,6 +101,9 @@ uint16_t get_board_temp_C()
 
 namespace bsp::output
 {
+const gpio_num_t OUT_FAN_PWM = GPIO_NUM_7;
+const gpio_num_t OUT_HEAT_PWM = GPIO_NUM_6;
+
 // We use a weak FET driving circuit, which can't tolerate high frequency switching
 // To prevent that, we allow FET to change state only once in a while
 constexpr uint32_t MIN_FET_STATE_DELAY_MS = 300;
