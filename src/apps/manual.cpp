@@ -5,10 +5,12 @@
 ManualMode::ManualMode() 
 {
     _set_state(State::Cooling);
+    _temp_setpoint = bsp::config::get<uint16_t>("temp_setpoint", 200);
 };
 
 void ManualMode::render(Adafruit_SSD1306 &display)
 {
+    static State old_state = State::Cooling;
     auto T = bsp::analog::get_plate_temp_C();
 
     run_temp_regulation();
@@ -52,6 +54,14 @@ void ManualMode::render(Adafruit_SSD1306 &display)
         else
             bsp::output::set_fan_duty(0);
     }
+
+    // On state transition from edit to whatever, save temperature config
+    if (old_state != _state && old_state == State::Editing)
+    {
+        bsp::config::set<uint16_t>("temp_setpoint", _temp_setpoint);
+        Serial.println("Saved setpoint");
+    }
+    old_state = _state;
 }
 
 void ManualMode::input_callback(Button::eButtonStates btn_state, int16_t enc_increment)

@@ -1,7 +1,7 @@
 #include "bsp.hpp"
-#include <EEPROM.h>
-#include "driver/ledc.h"
+#include <config2eeprom.hpp>
 #include "driver/temp_sensor.h"
+
 
 namespace bsp::analog
 {
@@ -140,19 +140,57 @@ uint8_t get_fan_duty()
     return fan_percent;
 }
 
-} // namespace hw::output
+} // namespace bsp::output
+
+namespace bsp::config
+{
+
+    staticConfigDoc config_map;
+    // Config class and map hash
+    config2eeprom c2e;
+
+    template <typename T>
+    T get(String key, T def_value)
+    {
+        T ret_val = def_value;
+        if (config_map.containsKey(key))
+        {
+            ret_val = config_map[key].as<T>();
+        }
+        return ret_val;
+    }
+
+    template <typename T>
+    void set(String key, T value)
+    {
+        Serial.println("Updated map");
+        config_map[key] = value;
+        c2e.save(config_map);
+    }
+
+    void init()
+    {
+        if (!c2e.load(config_map))
+        {
+            Serial.println("No config in EEPROM.");
+        }
+        else
+        {
+            Serial.println("Config found in EEPROM.");
+        }
+    }
+
+    template void set<uint16_t>(String, uint16_t);
+    template uint16_t get<uint16_t>(String, uint16_t);
+} // namespace bsp::config
 
 
 namespace bsp
 {
-    constexpr uint16_t EEPROM_SIZE = 4096;
     void init()
     {
         bsp::analog::init();
         bsp::output::init();
-        //EEPROM.begin(EEPROM_SIZE);
+        bsp::config::init();
     }
-
-
-  
 } // namespace hw

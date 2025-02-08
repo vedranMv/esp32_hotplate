@@ -32,6 +32,24 @@ namespace output
 
 } // namespace output
 
+namespace config
+{
+
+    template <typename T>
+    T get(String key, T def_value);
+
+    /**
+     * @brief Set config parameter and save it to non-volatile storage
+     *      Must not be called from ISR context!
+     * @tparam T 
+     * @param key Config parameter key
+     * @param value Config parameter value
+     */
+    template <typename T>
+    void set(String key, T value);
+
+}
+
     void init();
 
 }   // namespace bsp
