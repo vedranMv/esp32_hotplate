@@ -53,7 +53,7 @@ void HMI::register_screen(std::unique_ptr<BaseApp> screen)
     _registered_screens++;
 }
 
-void HMI::timer_callback()
+void HMI::isr_timer_callback()
 {
     _encoder.service();
 
@@ -67,6 +67,6 @@ void HMI::timer_callback()
 
     if (_registered_screens > 0)
     {
-        _screens[_active_screen]->input_callback(button, encoder);
+        _screens[_active_screen]->isr_input_callback(button, encoder);
     }
 }

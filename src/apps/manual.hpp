@@ -14,7 +14,7 @@ public:
 
     ManualMode();
     void render(Adafruit_SSD1306 &display) final;
-    void input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final;
+    void isr_input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final;
 
 private:
     bool _state_edit();

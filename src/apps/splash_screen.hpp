@@ -32,5 +32,5 @@ public:
         display.display();
         delay(2000);
     }
-    void input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final {}
+    void isr_input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final {}
 };

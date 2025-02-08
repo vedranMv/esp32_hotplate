@@ -64,7 +64,7 @@ void ManualMode::render(Adafruit_SSD1306 &display)
     old_state = _state;
 }
 
-void ManualMode::input_callback(Button::eButtonStates btn_state, int16_t enc_increment)
+void ManualMode::isr_input_callback(Button::eButtonStates btn_state, int16_t enc_increment)
 {
     if (_state_edit())
     {

@@ -16,7 +16,7 @@ void setup() {
     bsp::init();
     auto& hmi = HMI::get();
 
-    if (ITimer0.attachInterruptInterval(1000, [](void*)-> bool { HMI::get().timer_callback(); return true;}))
+    if (ITimer0.attachInterruptInterval(1000, [](void*)-> bool { HMI::get().isr_timer_callback(); return true;}))
 	{
 		Serial.print(F("Starting  ITimer0 OK, millis() = "));
 		Serial.println(millis());

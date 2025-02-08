@@ -17,7 +17,7 @@ class HMI
         Adafruit_SSD1306& hw() { return _hw; }
 
         void register_screen(std::unique_ptr<BaseApp> screen);
-        void timer_callback();
+        void isr_timer_callback();
 
     private:
         HMI(Adafruit_SSD1306 hw, ClickEncoder& encoder);

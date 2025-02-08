@@ -30,7 +30,7 @@ public:
         display.printf("Fan: %03d %%, %2d%cC\n", bsp::output::get_fan_duty(), bsp::analog::get_board_temp_C(),247);
     }
 
-    void input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final
+    void isr_input_callback(Button::eButtonStates btn_state, int16_t enc_increment) final
     {
 
     }
